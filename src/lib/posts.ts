@@ -7,7 +7,16 @@ import remarkGfm from "remark-gfm";
 import remarkRehype from "remark-rehype";
 import rehypeStringify from "rehype-stringify";
 
-const POSTS_DIR = path.join(process.cwd(), "content", "posts");
+const POSTS_DIR = path.join(process.cwd(), "src", "content", "posts");
+
+// const postsDirectory = path.join(
+//   process.cwd(),
+//   "src/content/posts"
+// );
+
+// export function getAllPosts() {
+//   return fs.readdirSync(postsDirectory);
+// }
 
 export type PostMeta = {
   slug: string;
