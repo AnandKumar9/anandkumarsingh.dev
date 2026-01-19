@@ -23,3 +23,7 @@ let a = SwiftSummary()
 **@Environment** should be used when the environment is supposed to have the data which in turn has been put there by an ancestor using **environment()** modifier. The property that gets put in the environment with that modifier should be declared in an extension of **EnvironmentValues** struct, with the property being synthesized there using keys that conform to **EnvironmentKey** protocol. Such environment properties are guranteed to have a default value, and are hence safe to use.
 
 > TestProject - TestSwiftUI ('State And Data Management' group there)
+
+## The Gist
+
+![](/SwiftUI-Gist.png)
