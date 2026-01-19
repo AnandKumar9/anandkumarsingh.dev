@@ -23,14 +23,14 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
   const html = await markdownToHtml(content);
 
   return (
-    <article>
+    <article className="post">
       <h1 style={{ marginBottom: 6 }}>{meta.title}</h1>
-      <div style={{ opacity: 0.7, marginBottom: 16 }}>
+      <div className="post-meta" style={{ opacity: 0.7, marginBottom: 16 }}>
         {meta.date} · {meta.tags.map((t) => (
           <a key={t} href={`/tags/${encodeURIComponent(t)}`} style={{ marginRight: 8 }}>{t}</a>
         ))}
       </div>
-      <div dangerouslySetInnerHTML={{ __html: html }} />
+      <div className="post-content" dangerouslySetInnerHTML={{ __html: html }} />
     </article>
   );
 }
