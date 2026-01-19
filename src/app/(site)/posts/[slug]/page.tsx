@@ -6,18 +6,20 @@ export async function generateStaticParams() {
   return getAllPostsMeta().map((p) => ({ slug: p.slug }));
 }
 
-export async function generateMetadata({ params }: { params: { slug: string } }) {
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
   const all = getAllPostsMeta();
-  const meta = all.find((p) => p.slug === params.slug);
+  const meta = all.find((p) => p.slug === slug);
   if (!meta) return {};
   return postMetadata({ title: meta.title, description: meta.summary, slug: meta.slug, date: meta.date });
 }
 
-export default async function PostPage({ params }: { params: { slug: string } }) {
+export default async function PostPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
   const all = getAllPostsMeta();
-  if (!all.some((p) => p.slug === params.slug)) notFound();
+  if (!all.some((p) => p.slug === slug)) notFound();
 
-  const { meta, content } = getPostBySlug(params.slug);
+  const { meta, content } = getPostBySlug(slug);
   const html = await markdownToHtml(content);
 
   return (
