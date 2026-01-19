@@ -9,9 +9,9 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
       <header style={{ marginBottom: 24 }}>
         <a href="/" style={{ fontWeight: 700, fontSize: 18, textDecoration: "none" }}>Tech Journal</a>
         <nav style={{ marginTop: 8, display: "flex", gap: 12 }}>
-          <a href="/">Posts</a>
-          <a href="/rss.xml">RSS</a>
-          <a href="/sitemap.xml">Sitemap</a>
+          {/* <a href="/">Posts</a> */}
+          {/* <a href="/rss.xml">RSS</a>
+          <a href="/sitemap.xml">Sitemap</a> */}
         </nav>
       </header>
       {children}
