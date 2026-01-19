@@ -26,6 +26,10 @@ export type PostMeta = {
   summary?: string;
 };
 
+function normalizeTag(tag: string) {
+  return tag.trim().toLowerCase();
+}
+
 function slugFromFilename(filename: string) {
   return filename.replace(/\.md$/, "");
 }
@@ -73,13 +77,24 @@ export async function markdownToHtml(markdown: string) {
 
 export function getAllTags() {
   const posts = getAllPostsMeta();
-  const map = new Map<string, number>();
-  for (const p of posts) for (const t of p.tags) map.set(t, (map.get(t) ?? 0) + 1);
+  const map = new Map<string, { tag: string; count: number }>();
+  for (const p of posts) {
+    for (const t of p.tags) {
+      const key = normalizeTag(t);
+      const existing = map.get(key);
+      if (existing) {
+        existing.count += 1;
+      } else {
+        map.set(key, { tag: t, count: 1 });
+      }
+    }
+  }
   return Array.from(map.entries())
-    .map(([tag, count]) => ({ tag, count }))
+    .map(([, value]) => value)
     .sort((a, b) => b.count - a.count || a.tag.localeCompare(b.tag));
 }
 
 export function getPostsByTag(tag: string) {
-  return getAllPostsMeta().filter((p) => p.tags.includes(tag));
+  const key = normalizeTag(tag);
+  return getAllPostsMeta().filter((p) => p.tags.some((t) => normalizeTag(t) === key));
 }

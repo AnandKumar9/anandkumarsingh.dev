@@ -1,33 +1,18 @@
-import { getAllTags, getPostsByTag } from "@/lib/posts";
-import { site } from "@/lib/seo";
-import type { Metadata } from "next";
+import { getAllTags } from "@/lib/posts";
 
-export async function generateStaticParams() {
-  return getAllTags().map(({ tag }) => ({ tag }));
-}
-
-export function generateMetadata({ params }: { params: { tag: string } }): Metadata {
-  const tag = decodeURIComponent(params.tag);
-  const title = `Tag: ${tag}`;
-  const url = `${site.url}/tags/${encodeURIComponent(tag)}`;
-  return { title, alternates: { canonical: url }, description: `Posts tagged “${tag}”.` };
-}
-
-export default function TagPage({ params }: { params: { tag: string } }) {
-  const tag = decodeURIComponent(params.tag);
-  const posts = getPostsByTag(tag);
+export default function TagsIndexPage() {
+  const tags = getAllTags();
 
   return (
     <div>
-      <h1>Tag: {tag}</h1>
-      <ul style={{ paddingLeft: 16 }}>
-        {posts.map((p) => (
-          <li key={p.slug} style={{ marginBottom: 10 }}>
-            <a href={`/posts/${p.slug}`}>{p.title}</a>
-            <div style={{ fontSize: 13, opacity: 0.7 }}>{p.date}</div>
-          </li>
+      <h1>Tags</h1>
+      <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
+        {tags.map(({ tag, count }) => (
+          <a key={tag} href={`/tags/${encodeURIComponent(tag)}`} style={{ border: "1px solid #ddd", padding: "4px 8px", borderRadius: 999 }}>
+            {tag} <span style={{ opacity: 0.6 }}>({count})</span>
+          </a>
         ))}
-      </ul>
+      </div>
     </div>
   );
 }
