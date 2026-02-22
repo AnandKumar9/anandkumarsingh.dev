@@ -24,7 +24,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
 
   return (
     <article className="post">
-      <h1 style={{ marginBottom: 6 }}>{meta.title}</h1>
+      <h1 className="post-title">{meta.title}</h1>
       <div className="post-meta" style={{ opacity: 0.7, marginBottom: 16 }}>
         {meta.date} · {meta.tags.map((t) => (
           <a key={t} href={`/tags/${encodeURIComponent(t)}`} style={{ marginRight: 8 }}>{t}</a>

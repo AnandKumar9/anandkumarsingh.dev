@@ -1,0 +1,35 @@
+---
+title: What SwiftUI property wrapper (if any) to use in a View?
+---
+
+flowchart TD
+
+A["Is Source of Truth in current view?"]
+
+A -- Yes --> B["Does the view intend to make changes to it?"]
+
+B -- No --> C["let"]
+
+B -- Yes --> D["@State var
+(type should be @Observable if reference type)"]
+
+A -- No --> E["Is it in immediate parent view?"]
+
+E -- No
+(ancestor view) --> F["@Environment var
+(cannot be mutated by current view)"]
+
+E -- Yes --> G["Does it need to make changes too
+and not simply track changes alone?"]
+
+G -- No
+(just track changes) --> H["let
+(type should be @Observable if reference type)"]
+
+G -- Yes --> I["Is it a reference type?"]
+
+I -- No
+(value type) --> J["@Binding var"]
+
+I -- Yes --> K["@Bindable var
+(type should be @Observable)"]
