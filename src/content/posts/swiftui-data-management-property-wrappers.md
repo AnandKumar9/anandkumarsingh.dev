@@ -39,13 +39,13 @@ And even this isn't fully accurate or comprehensive. For instance what happens i
 
 I have sketched this diagram based on my understanding, and this holds up better as of now (i.e. early 2026/iOS 26).
 
-![](/SwiftUI-Gist-2025.png)
+![](/SwiftUI-Gist-2025.png)![Claude-Code-Features](../../../../../../Technical Notes/16. IDEs/3. Claude Code/assets/Claude-Code-Features.png)
 
 While the diagram is mostly self-explanatory, if you want there is a [companion project](https://github.com/AnandKumar9/SwiftUI-StateAndDataManagement/tree/main) available in my GitHub and it has code snippets showing various facets of this diagram. Some of the nuances though are specifically mentioned below.
 
 ### 1. You don't need any property wrapper if you just want to track changes
 
-If there is a child view that just needs to track some `@State` property in its parent and update the UI but not make any changes to the property itself, it does not need a `@Binding ` or any other property wrapper. Just a plain `let` declaration will suffice, its just that the parent view's state's type should be marked with `@Observable` macro if its a reference type. 
+If there is a child view that just needs to track some `@State` property in its parent and update the UI but not make any changes to the property itself, it does not need a `@Binding` or any other property wrapper. Just a plain `let` declaration will suffice, its just that the parent view's state's type should be marked with `@Observable` macro if its a reference type. 
 
 The source of truth should be declared as `@State`, if its a value type that is sufficient but if its a reference type then the reference type *must have* `@Observable` macro attached to it.
 
