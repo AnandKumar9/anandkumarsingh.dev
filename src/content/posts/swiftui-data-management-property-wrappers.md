@@ -39,7 +39,7 @@ And even this isn't fully accurate or comprehensive. For instance what happens i
 
 I have sketched this diagram based on my understanding, and this holds up better as of now (i.e. early 2026/iOS 26).
 
-![](/SwiftUI-Gist-2025.png)![Claude-Code-Features](../../../../../../Technical Notes/16. IDEs/3. Claude Code/assets/Claude-Code-Features.png)
+![](/SwiftUI-Gist-2025.png)
 
 While the diagram is mostly self-explanatory, if you want there is a [companion project](https://github.com/AnandKumar9/SwiftUI-StateAndDataManagement/tree/main) available in my GitHub and it has code snippets showing various facets of this diagram. Some of the nuances though are specifically mentioned below.
 
