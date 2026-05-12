@@ -98,3 +98,9 @@ export function getPostsByTag(tag: string) {
   const key = normalizeTag(tag);
   return getAllPostsMeta().filter((p) => p.tags.some((t) => normalizeTag(t) === key));
 }
+
+export function getPageContent(pageName: string) {
+  const pagesDir = path.join(process.cwd(), "src", "content", "pages");
+  const raw = fs.readFileSync(path.join(pagesDir, `${pageName}.md`), "utf8");
+  return raw;
+}
